@@ -17,10 +17,11 @@ form.addEventListener("submit",function(e){
         const ip_month=label_month.parentElement.querySelector("input").value
         const ip_year=label_year.parentElement.querySelector("input").value
         const last_day=new Date(ip_year,ip_month,0)
+        const curr_day=d.getDate()
+        const curr_month=d.getMonth()+1
         console.log(last_day);
-        const rangeinvalid=checkRange(ip_day,ip_month,ip_year,last_day.getDate(),curr_year,label_day,label_month,label_year)
+        const rangeinvalid=checkRange(ip_day,ip_month,ip_year,last_day.getDate(),curr_year,label_day,label_month,label_year,curr_day,curr_month)
         if(rangeinvalid){
-            console.log("in");
             togglereverse(label_day.parentElement)
             togglereverse(label_month.parentElement)
             togglereverse(label_year.parentElement)
@@ -32,6 +33,7 @@ form.addEventListener("submit",function(e){
             update(daytobeUpdated,monthtobeUpdated,yeartobeUpdated)
         }       
     }
+    // Have to think how to use them. They are for removing red marks if only 2 are wrong
     // if(!dayempty && !monthempty){
     //     togglereverse(label_day.parentElement)
     //         togglereverse(label_month.parentElement)
@@ -44,11 +46,7 @@ form.addEventListener("submit",function(e){
     //     togglereverse(label_day.parentElement)
     //         togglereverse(label_year.parentElement)
     // }
-
-
-
-    
-    
+       
 })
 
 function update(day,month,year){
@@ -88,7 +86,7 @@ function update(day,month,year){
 function calculate(ip_day,ip_month,ip_year,last_day){
     const d=new Date()
     const curr_day=d.getDate()
-    const curr_month=d.getMonth()
+    const curr_month=d.getMonth()+1
     const curr_year=d.getFullYear()
     let actualday=curr_day-ip_day;
     let ActualYear=curr_year-ip_year
@@ -106,12 +104,16 @@ function calculate(ip_day,ip_month,ip_year,last_day){
     return [actualday,actualmonth,ActualYear]
 }
 
-function checkRange(ip_day,ip_month,ip_year,last_day,curr_year,label_day,label_month,label_year){
+function checkRange(ip_day,ip_month,ip_year,last_day,curr_year,label_day,label_month,label_year,curr_day,curr_month){
     let flag=0;
+    if(ip_day>curr_day && ip_month==curr_month && ip_year==curr_year){
+        label_day.parentElement.querySelector("p").innerHTML="Must be in past";
+        toggle(label_day.parentElement)
+        flag=1;
+    }
     if(ip_year>curr_year){
         label_year.parentElement.querySelector("p").innerHTML="Must be in past";
         toggle(label_year.parentElement)
-        console.log(label_year.parentElement);
         flag=1;
     }
     if(ip_month>12){
@@ -120,11 +122,11 @@ function checkRange(ip_day,ip_month,ip_year,last_day,curr_year,label_day,label_m
         flag=1;
     }
     if(ip_day<0 || ip_day>last_day|| ip_day>31){
-        console.log(ip_day);
         label_day.parentElement.querySelector("p").innerHTML="Enter Valid Date"
         toggle(label_day.parentElement)
         flag=1;
     }
+
     if(flag===1)
     return false
     else
@@ -143,7 +145,6 @@ function validator(ele){
 
 }
 function toggle(ele){
-    console.log("ok");
     ele.querySelector("input").classList.add("invalid");
     ele.querySelector("label").classList.add("invalid");
     ele.querySelector("p").classList.add("invalid")
@@ -160,7 +161,4 @@ function togglereverse(ele){
 }
 function empty_msg(ele){
     ele.querySelector("p").innerHTML="This field is required"
-    // ele.querySelector("p").classList.add("invalid")
-    // ele.querySelector("p").classList.add("error_msg")
-    // ele.querySelector("p").classList.remove("validate")
 }

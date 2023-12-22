@@ -87,7 +87,7 @@
     font-family: "Poppins-bold";
 }
 .calender{
-    max-width: 400px;
+    max-width: 500px;
     background-color: var(--clr-White);
     padding: calc(var(--padding)*1.5) calc(var(--padding)*1.5) calc(var(--padding)*2) calc(var(--padding)*1.5);
     border-radius: 16px 16px 103px 16px;
@@ -191,7 +191,12 @@ input::placeholder{
 }
 
 
-@media only screen and (max-width:415px){
+@media only screen and (max-width:430px){
+    input{
+        padding: calc(var(--padding)*0.5);
+    }
+}
+@media only screen and (max-width:385px){
     .grid_flow{
         grid-template-columns: 1fr 1fr 1fr;
         gap:1rem;
@@ -200,13 +205,16 @@ input::placeholder{
         margin-top: 20px;
         justify-content: center;
     }   
-    .decorate{
+    input{
+        padding: calc(var(--padding)*0.5);
+    }   
+}
+
+@media only screen and (max-width:365px){
+     .decorate{
         font-size: var(--fs-300);
     }
     .user_age>p[data-item="age"]{
         font-size: var(--fs-200);
     }
-    input{
-        padding: calc(var(--padding)*0.5);
-    }   
 }
