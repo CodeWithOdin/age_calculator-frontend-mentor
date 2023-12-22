@@ -97,6 +97,7 @@ function calculate(ip_day,ip_month,ip_year,last_day){
     }
         
     if(actualday<0){
+        if(ActualYear>0)
         ActualYear-=1;
         actualmonth=11-actualmonth;
         actualday=last_day-ip_day+curr_day;
