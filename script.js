@@ -12,14 +12,24 @@ form.addEventListener("submit",function(e){
     const curr_year=d.getFullYear();
 
     if(!dayempty && !monthempty && !yearempty ){
-        console.log("in");
+        if(!dayempty && !monthempty){
+        togglereverse(label_day.parentElement)
+            togglereverse(label_month.parentElement)
+    }
+    if(!monthempty && !yearempty){
+        togglereverse(label_month.parentElement)
+            togglereverse(label_year.parentElement)
+    }
+    if(!dayempty && !yearempty){
+        togglereverse(label_day.parentElement)
+            togglereverse(label_year.parentElement)
+    }
         const ip_day=label_day.parentElement.querySelector("input").value
         const ip_month=label_month.parentElement.querySelector("input").value
         const ip_year=label_year.parentElement.querySelector("input").value
         const last_day=new Date(ip_year,ip_month,0)
         const curr_day=d.getDate()
         const curr_month=d.getMonth()+1
-        console.log(last_day);
         const rangeinvalid=checkRange(ip_day,ip_month,ip_year,last_day.getDate(),curr_year,label_day,label_month,label_year,curr_day,curr_month)
         if(rangeinvalid){
             togglereverse(label_day.parentElement)
@@ -34,18 +44,7 @@ form.addEventListener("submit",function(e){
         }       
     }
     // Have to think how to use them. They are for removing red marks if only 2 are wrong
-    // if(!dayempty && !monthempty){
-    //     togglereverse(label_day.parentElement)
-    //         togglereverse(label_month.parentElement)
-    // }
-    // if(!monthempty && !yearempty){
-    //     togglereverse(label_month.parentElement)
-    //         togglereverse(label_year.parentElement)
-    // }
-    // if(!dayempty && !yearempty){
-    //     togglereverse(label_day.parentElement)
-    //         togglereverse(label_year.parentElement)
-    // }
+    
        
 })
 
@@ -135,7 +134,6 @@ function checkRange(ip_day,ip_month,ip_year,last_day,curr_year,label_day,label_m
 }
 
 function validator(ele){
-    console.log(ele.querySelector("input").value);
     if(ele.querySelector("input").value===""){
         toggle(ele)
         empty_msg(ele)
