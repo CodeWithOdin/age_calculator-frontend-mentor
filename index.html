@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  <link rel="stylesheet" href="style.css">
+  <title>Age calculator app</title>
+</head>
+<body>
+
+    <main>
+      <div class="wrapper">
+        <div class="calender">
+            <form action="" class="age_form">
+              <div class="grid_flow">
+                <div class="flex-flow">
+                  <label for="day" class="label_day">Day</label>
+                  <input class="day_field"type="number" id="day" placeholder="DD">
+                  <p class="validate validate_day">Must be a valid day</p>
+                </div>
+                <div class="flex-flow">
+                  <label for="month" class="label_month">Month</label>
+                  <input type="number" class="month_field" id="month" placeholder="MM">
+                  <p class="validate validate_month">Must be a valid day</p>
+                </div>
+                <div class="flex-flow">
+                  <label for="year" class="label_year">Year</label>
+                  <input type="number" id="year" class="year_field " placeholder="YYYY">
+                  <p class="validate validate_year">Must be a past year</p>
+                </div>
+              </div>
+              <div class="divider">
+                <button type="submit" class="img_btn"><img src="./assets/images/icon-arrow.svg" alt=""></button>
+              </div>
+            </form>
+            <div class="user_age">
+              <p class="flex-flow" data-item="age"><span class="decorate yr"> - - </span>years</p>
+              <p class="flex-flow" data-item="age"><span class="decorate mnth"> - - </span>months</p>
+              <p class="flex-flow" data-item="age"><span class="decorate day"> - - </span>days</p>
+            </div>
+        </div>
+      </div>
+    </main>
+  <!-- Day
+  DD
+
+  Month
+  MM
+
+  Year
+  YYYY
+
+  -- years
+  -- months
+  -- days -->
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
