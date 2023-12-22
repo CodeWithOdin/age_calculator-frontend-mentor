@@ -133,6 +133,9 @@ input::placeholder{
     font-size: calc(var(--fs-100)*1);
     color: hsl(var(--clr-Smokey-grey-hsl),0.8)
 }
+.day_field, .month_field, .year_field{
+    text-align: center;
+}
 .divider{
     display: flex;
     justify-content: end;
@@ -188,7 +191,7 @@ input::placeholder{
 }
 
 
-@media only screen and (max-width:385px){
+@media only screen and (max-width:415px){
     .grid_flow{
         grid-template-columns: 1fr 1fr 1fr;
         gap:1rem;
@@ -205,5 +208,5 @@ input::placeholder{
     }
     input{
         padding: calc(var(--padding)*0.5);
-    }
+    }   
 }
