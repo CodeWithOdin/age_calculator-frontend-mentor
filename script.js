@@ -30,8 +30,8 @@ form.addEventListener("submit",function(e){
         const last_day=new Date(ip_year,ip_month,0)
         const curr_day=d.getDate()
         const curr_month=d.getMonth()+1
-        const rangeinvalid=checkRange(ip_day,ip_month,ip_year,last_day.getDate(),curr_year,label_day,label_month,label_year,curr_day,curr_month)
-        if(rangeinvalid){
+        const rangeisvalid=checkRange(ip_day,ip_month,ip_year,last_day.getDate(),curr_year,label_day,label_month,label_year,curr_day,curr_month)
+        if(rangeisvalid){
             togglereverse(label_day.parentElement)
             togglereverse(label_month.parentElement)
             togglereverse(label_year.parentElement)
@@ -87,19 +87,39 @@ function calculate(ip_day,ip_month,ip_year,last_day){
     const curr_day=d.getDate()
     const curr_month=d.getMonth()+1
     const curr_year=d.getFullYear()
-    let actualday=curr_day-ip_day;
+
+    let actualday=ip_day-curr_day;
     let ActualYear=curr_year-ip_year
-    let actualmonth=curr_month-ip_month
-    if(actualmonth<0){
+    let actualmonth=ip_month-curr_month
+
+    if(actualday>0 && actualmonth>0 ){
+        actualmonth=11-actualmonth;
+        const lastDateformat = new Date(curr_year,curr_month-1,0);
+        const lastdate=lastDateformat.getDate()
+        actualday=(lastdate-ip_day)+curr_day
         ActualYear-=1
-        actualmonth=12-(ip_month-curr_month)
+    }
+
+    if(actualmonth<0){
+        if(actualday<0){
+            actualday=-actualday;
+            actualmonth=-actualmonth
+        }
+        else{
+            actualmonth=-(actualmonth+=1)
+            const lastDateformat = new Date(curr_year,curr_month-1,0);
+            const lastdate=lastDateformat.getDate()
+
+            actualday=lastdate-(ip_day-curr_day)
+        }
+        
     }
         
     if(actualday<0){
         if(ActualYear>0)
         ActualYear-=1;
-        actualmonth=11-actualmonth;
-        actualday=last_day-ip_day+curr_day;
+        actualmonth=12-actualmonth;
+        actualday=-actualday;
     }
     return [actualday,actualmonth,ActualYear]
 }
@@ -109,6 +129,13 @@ function checkRange(ip_day,ip_month,ip_year,last_day,curr_year,label_day,label_m
     if(ip_day>curr_day && ip_month==curr_month && ip_year==curr_year){
         label_day.parentElement.querySelector("p").innerHTML="Must be in past";
         toggle(label_day.parentElement)
+        flag=1;
+    }
+    if(ip_day>curr_day && ip_month>curr_month && ip_year==curr_year){
+        label_day.parentElement.querySelector("p").innerHTML="Must be in past";
+        label_month.parentElement.querySelector("p").innerHTML="Must be in past";
+        toggle(label_day.parentElement)
+        toggle(label_month.parentElement)
         flag=1;
     }
     if(ip_year>curr_year){
