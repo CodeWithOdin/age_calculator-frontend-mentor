@@ -138,6 +138,11 @@ function checkRange(ip_day,ip_month,ip_year,last_day,curr_year,label_day,label_m
         toggle(label_month.parentElement)
         flag=1;
     }
+    if(ip_day<curr_day && ip_month>curr_month && ip_year==curr_year){
+        label_month.parentElement.querySelector("p").innerHTML="Must be in past";
+        toggle(label_month.parentElement)
+        flag=1;
+    }
     if(ip_year>curr_year){
         label_year.parentElement.querySelector("p").innerHTML="Must be in past";
         toggle(label_year.parentElement)
