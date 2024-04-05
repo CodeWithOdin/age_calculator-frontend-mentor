@@ -126,22 +126,27 @@ function calculate(ip_day,ip_month,ip_year,last_day){
 
 function checkRange(ip_day,ip_month,ip_year,last_day,curr_year,label_day,label_month,label_year,curr_day,curr_month){
     let flag=0;
-    if(ip_day>curr_day && ip_month==curr_month && ip_year==curr_year){
-        label_day.parentElement.querySelector("p").innerHTML="Must be in past";
-        toggle(label_day.parentElement)
-        flag=1;
-    }
-    if(ip_day>curr_day && ip_month>curr_month && ip_year==curr_year){
-        label_day.parentElement.querySelector("p").innerHTML="Must be in past";
-        label_month.parentElement.querySelector("p").innerHTML="Must be in past";
-        toggle(label_day.parentElement)
-        toggle(label_month.parentElement)
-        flag=1;
-    }
-    if(ip_day<curr_day && ip_month>curr_month && ip_year==curr_year){
-        label_month.parentElement.querySelector("p").innerHTML="Must be in past";
-        toggle(label_month.parentElement)
-        flag=1;
+
+    if(ip_year==curr_year){
+            if(ip_day>curr_day){
+                label_day.parentElement.querySelector("p").innerHTML="Must be in past";
+                toggle(label_day.parentElement)
+                flag=1;
+            }
+            if(ip_month>curr_month){
+                label_month.parentElement.querySelector("p").innerHTML="Must be in past";
+                toggle(label_month.parentElement)
+                flag=1;
+            }
+            else if(ip_day>curr_day && ip_month>curr_month ){
+                label_day.parentElement.querySelector("p").innerHTML="Must be in past";
+                label_month.parentElement.querySelector("p").innerHTML="Must be in past";
+                toggle(label_day.parentElement)
+                toggle(label_month.parentElement)
+                flag=1;
+            }
+
+
     }
     if(ip_year>curr_year){
         label_year.parentElement.querySelector("p").innerHTML="Must be in past";
@@ -153,7 +158,7 @@ function checkRange(ip_day,ip_month,ip_year,last_day,curr_year,label_day,label_m
         toggle(label_month.parentElement)
         flag=1;
     }
-    if(ip_day<0 || ip_day>last_day|| ip_day>31){
+    if(ip_day<0 || ip_day>last_day){
         label_day.parentElement.querySelector("p").innerHTML="Enter Valid Date"
         toggle(label_day.parentElement)
         flag=1;
