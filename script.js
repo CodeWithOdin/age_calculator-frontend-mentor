@@ -159,16 +159,18 @@ function checkRange(ip_day,ip_month,ip_year,last_day,curr_year,label_day,label_m
         toggle(label_month.parentElement)
         flag=1;
     }
-    if(ip_month<=0){
+    if(ip_year!=0 && ip_month<=0 || ip_year===0 && ip_month<0){
         label_month.parentElement.querySelector("p").innerHTML="Must be greater than equal to 1";
         toggle(label_month.parentElement)
         flag=1;
     }
-    if(ip_day<=0 || ip_day>last_day){
+    if(ip_year!=0  && ip_day<=0 || ip_day>last_day || ip_year===0 && ip_day<0){
         label_day.parentElement.querySelector("p").innerHTML="Enter Valid Date"
         toggle(label_day.parentElement)
         flag=1;
     }
+    
+
 
     if(flag===1)
     return false
