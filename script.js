@@ -127,7 +127,7 @@ function calculate(ip_day,ip_month,ip_year,last_day){
 function checkRange(ip_day,ip_month,ip_year,last_day,curr_year,label_day,label_month,label_year,curr_day,curr_month){
     let flag=0;
 
-    if(ip_year==curr_year){
+    if(ip_year==curr_year || ip_year>curr_year){
             if(ip_day>curr_day){
                 label_day.parentElement.querySelector("p").innerHTML="Must be in past";
                 toggle(label_day.parentElement)
@@ -153,12 +153,18 @@ function checkRange(ip_day,ip_month,ip_year,last_day,curr_year,label_day,label_m
         toggle(label_year.parentElement)
         flag=1;
     }
+
     if(ip_month>12){
         label_month.parentElement.querySelector("p").innerHTML="Must be less than equal to 12";
         toggle(label_month.parentElement)
         flag=1;
     }
-    if(ip_day<0 || ip_day>last_day){
+    if(ip_month<=0){
+        label_month.parentElement.querySelector("p").innerHTML="Must be greater than equal to 1";
+        toggle(label_month.parentElement)
+        flag=1;
+    }
+    if(ip_day<=0 || ip_day>last_day){
         label_day.parentElement.querySelector("p").innerHTML="Enter Valid Date"
         toggle(label_day.parentElement)
         flag=1;
